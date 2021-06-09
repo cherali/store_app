@@ -30,7 +30,7 @@ const TextCmp = styled.span`
   display: ${p => DISPLAYS[p.variant]};
   text-align: ${p => p.align};
   font-weight: ${p => p.weight};
-  line-height: ${p => p.lineHeight}px;
+  line-height: ${p => isNaN(p.lineHeight) ? 'normal' : `${p.lineHeight}px`};
 `
 
 function Text({ children, variant, decoration, tag, align, weight, lineHeight, ...rest }) {
