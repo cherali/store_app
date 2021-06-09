@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { borderColor } from 'common/styles/themeColors'
 import Text from 'Components/Text/Text'
 
+
 // TODO: fix border for rtl direction.
 const ProductWrapper = styled.div`
   display: flex;
@@ -15,7 +16,6 @@ const ProductWrapper = styled.div`
 `
 
 const ProductCardContainer = styled(Link)`
-  background-color: rgba(255, 255, 255, 0.8);
   padding: 2rem 2rem 1.25rem;
   font-size: 30px;
   text-decoration: none;
@@ -32,7 +32,10 @@ const ProductImage = styled.img``
 
 export function ProductCard({ product }) {
   return (
-    <ProductCardContainer to={`/product-details/${product.id}`}>
+    <ProductCardContainer to={{
+      pathname: `/product-details/${product.id}`,
+      state: { product }
+    }}>
       <ProductImage alt='' src={product.image} />
       <Text tag='span' variant='title' align='left'>{product.text}</Text>
     </ProductCardContainer>
