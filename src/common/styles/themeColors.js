@@ -1,2 +1,5 @@
 export const borderColor = '#d6d6d6'
 export const titleColor = '#5f6c84'
+export const orange = '#f7e8a1'
+export const orangeDark = '#a37730'
+export const orangeLight = '#fffde4'

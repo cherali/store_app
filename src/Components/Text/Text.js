@@ -8,7 +8,7 @@ const FONT_SIZE = {
 }
 
 const FONT_COLOR = {
-  text: 'black',
+  text: 'inherit',
   title: titleColor,
 }
 
@@ -23,15 +23,18 @@ const TextCmp = styled.span`
   font-size: ${p => FONT_SIZE[p.variant]}px;
   display: ${p => DISPLAYS[p.variant]};
   text-align: ${p => p.align};
+  font-weight: ${p => p.weight};
 `
 
-function Text({ children, variant, decoration, tag, align }) {
+function Text({ children, variant, decoration, tag, align, weight, ...rest }) {
   return (
     <TextCmp
       as={tag}
       variant={variant}
       decoration={decoration}
       align={align}
+      weight={weight}
+      {...rest}
     >
       {children}
     </TextCmp>
@@ -43,6 +46,7 @@ Text.defaultProps = {
   tag: 'span',
   decoration: 'auto',
   align: 'inherit',
+  weight: 300
 }
 
 export default Text

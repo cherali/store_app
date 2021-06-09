@@ -94,6 +94,11 @@ export const MainStyles = createGlobalStyle`
     width: 50% !important;
   }
 
+  .mx-3 {
+    margin-left: 1rem;
+    margin-right: 1rem;
+  }
+
   .m-3 {
     margin: 1rem;
   }
