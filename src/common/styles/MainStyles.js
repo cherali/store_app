@@ -44,4 +44,69 @@ export const MainStyles = createGlobalStyle`
     border-collapse: collapse;
     border-spacing: 0;
   }
+
+  * {
+    box-sizing: border-box;
+  }
+
+  body {
+    direction: ltr;
+  }
+
+ /* helpers */
+ .position-relative {
+    position: relative;
+  }
+
+  .d-flex {
+    display: flex;
+  }
+
+  .flex-wrap {
+    flex-wrap: wrap;
+  }
+
+  .flex-column {
+    flex-direction: column;
+  }
+
+  .justify-content-center {
+    justify-content: center;
+  }
+
+  .justify-content-between {
+    justify-content: space-between;
+  }
+
+  .align-items-center {
+    align-items: center;
+  }
+
+  .w-auto {
+    width: auto !important;
+  }
+
+  .w-100 {
+    width: 100% !important;
+  }
+
+  .w-50 {
+    width: 50% !important;
+  }
+
+  .m-3 {
+    margin: 1rem;
+  }
+
+  .mt-3 {
+    margin-top: 1rem;
+  }
+
+  .mb-3 {
+    margin-bottom: 1rem;
+  }
+
+  .p3 {
+    padding: 1rem;
+  }
 `
