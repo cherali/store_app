@@ -9,7 +9,7 @@ const NotFound = lazy(() => import('pages/NotFound'))
 export const routes = [
   { path: '/', component: Home, private: false },
   { path: '/product', component: Product, private: false },
-  { path: '/product-details', component: ProductDetails, private: false },
+  { path: '/product-details/:id', component: ProductDetails, private: false },
 
   { path: '/not-found', component: NotFound, private: false },
 ]
