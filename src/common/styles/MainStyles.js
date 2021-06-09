@@ -1,6 +1,11 @@
 import { createGlobalStyle } from 'styled-components'
 
 export const MainStyles = createGlobalStyle`
+ @font-face {
+    font-family: IRANSans;
+    src: url('/assets/fonts/IRANSans.ttf');
+  }
+
   html, body, div, span, applet, object, iframe,
   h1, h2, h3, h4, h5, h6, p, blockquote, pre,
   a, abbr, acronym, address, big, cite, code,
@@ -47,10 +52,12 @@ export const MainStyles = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+    font-family: IRANSans;
   }
 
   body {
     direction: ltr;
+    font-family: IRANSans;
   }
 
  /* helpers */
