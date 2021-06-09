@@ -1,5 +1,5 @@
 import { Suspense, useEffect } from 'react'
-import { BrowserRouter, Switch, Route, useHistory } from 'react-router-dom'
+import { BrowserRouter, Switch, Route, useHistory, matchPath  } from 'react-router-dom'
 import { routes } from 'routes'
 import Spinner from 'Components/Spinner/Spinner'
 
@@ -16,25 +16,25 @@ function AppWrapper() {
 
 function App() {
   const appRoute = routes
-  const routesName = appRoute.map(item => item.path)
 
   const history = useHistory()
   const pathname = history.location.pathname
 
   // redirect to not found in case route doesn't exist
   useEffect(() => {
-    if (!routesName.includes(pathname)) {
+    const isMatch = appRoute.find(route  => matchPath(pathname, route))
+
+    if (!isMatch) {
       history.replace('/not-found')
     }
-  }, [pathname, history, routesName])
-
+  }, [pathname, history, appRoute])
 
   return (
     <Switch>
       <Suspense fallback={<Spinner />}>
         {
           appRoute.map((item, i) => (
-            <Route key={i} exact path={item.path} component={item.component} />
+            <Route key={i} exact={item.exact} path={item.path} component={item.component} />
           ))
         }
       </Suspense>
