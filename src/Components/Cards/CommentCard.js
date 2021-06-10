@@ -17,6 +17,7 @@ const Container = styled.div`
 const Avatar = styled.img`
   width: 100px;
   height: 100px;
+  border-radius: 50%;
 `
 
 const Content = styled.div`
@@ -31,10 +32,10 @@ const EmailText = styled(Text)`
 function CommentCard({ comment }) {
   return (
     <Container>
-      <Avatar alt=' ' src={comment.avatar} />
+      <Avatar alt=' ' src='https://via.placeholder.com/100' />
 
       <Content>
-        <Text tag='p' variant='titleItem' lineHeight={25} weight={600}>{comment.title}</Text>
+        <Text tag='p' variant='titleItem' lineHeight={25} weight={600}>{comment.name}</Text>
         <EmailText tag='p' variant='titleItem' lineHeight={35} weight={600}>{comment.email}</EmailText>
         <Text tag='p' variant='title' lineHeight={20}>{comment.body}</Text>
       </Content>

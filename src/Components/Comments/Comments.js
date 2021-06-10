@@ -1,31 +1,39 @@
+import { useState, useEffect } from 'react'
+import { useSelector } from 'react-redux'
 import styled from 'styled-components'
+import { clearProductCommentsList, getProductCommentsList } from 'redux/actions/commentActions'
 import CommentCard from 'Components/Cards/CommentCard'
-
-// TODO: replace this data with real data
-// fake data
-const COMMNETS = [
-  { id: 1, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 2, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 3, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 4, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 5, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 6, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 7, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 8, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-  { id: 9, avatar: '/assets/images/avatar.jpg', title: 'id labore ex et quam laborum', email: 'Eliseo@gardner.biz', body: '"laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium "laudantium enim quasi est quidem magnam voluptate ipsam eos\ntempora quo necessitatibus\ndolor quam autem quasi\nreiciendis et nam sapiente accusantium' },
-]
+import Spinner from 'Components/Spinner/Spinner'
+import Text from 'Components/Text/Text'
 
 const Container = styled.div`
   padding: 3rem 0 0;
 `
 
-// TODO: product id required to get comment of posts
 function Comments({ id }) {
+  const [show, setShow] = useState(false) // use this flag to avoid clear comment flicking
+  const comments = useSelector(s => s.comments?.productComments)
+
+
+  useEffect(() => {
+    const currentCommentPost = comments && comments[0]?.postId
+    if(currentCommentPost !== id) {
+      clearProductCommentsList() // clear comment list if id selected post changed
+      getProductCommentsList(id) // get comments
+      setShow(true)
+    } else {
+      setShow(true)
+    }
+  }, [id, comments])
+
+
   return (
     <Container>
-      {COMMNETS?.map(comment => (
+      {!comments && <Spinner />}
+      {show && comments?.map(comment => (
         <CommentCard key={comment.id} comment={comment} />
       ))}
+      {comments?.length === 0 && <Text variant='titleItem' align='center'>No Comment</Text>}
     </Container>
   )
 }
