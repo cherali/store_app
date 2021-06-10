@@ -27,7 +27,11 @@ const ProductCardContainer = styled(Link)`
   border-right: 1px solid ${borderColor};
 `
 
-const ProductImage = styled.img``
+const ProductImage = styled.img`
+  display: block;
+  margin: 0 auto;
+  margin-bottom: 1rem;
+`
 
 
 export function ProductCard({ product }) {
@@ -36,8 +40,8 @@ export function ProductCard({ product }) {
       pathname: `/product-details/${product.id}`,
       state: { product }
     }}>
-      <ProductImage alt='' src={product.image} />
-      <Text tag='span' variant='title' align='left'>{product.text}</Text>
+      <ProductImage alt='' src='https://via.placeholder.com/270' />
+      <Text tag='span' variant='title' align='left'>{product.title}</Text>
     </ProductCardContainer>
   )
 }

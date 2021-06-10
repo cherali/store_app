@@ -1,4 +1,5 @@
 import axios from 'axios'
+import { dispatch } from 'index'
 
 
 const CancelToken = axios.CancelToken
@@ -34,6 +35,29 @@ async function Api({ method = 'get', url, bodyParams, headerParams, cancelable =
 
 
   } catch (err) {
+    // log err
+    console.log('err', JSON.stringify(err))
+  }
+}
+
+
+export async function GlobalApi({ method, url, successType, failType, bodyParams, headerParams, cancelable = false }) {
+  try {
+    const res = await Api({
+      method,
+      url,
+      bodyParams,
+      headerParams,
+      cancelable,
+      apiName: successType,
+    })
+
+    dispatch({ type: successType, payload: res })
+
+
+  } catch (err) {
+    dispatch({ type: failType })
+
     // log err
     console.log('err', JSON.stringify(err))
   }
